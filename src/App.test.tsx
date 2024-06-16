@@ -23,4 +23,9 @@ describe('App', () => {
     fireEvent.click(favoritesCheckbox);
     expect(favoritesCheckbox.checked).toBe(true);
   });
+  it('renders SearchFilter component', () => {
+    render(<App />);
+    const externalFilter = screen.getByPlaceholderText(/Ex: United Kindom/i);
+    expect(externalFilter).toBeInTheDocument();
+  });
 });

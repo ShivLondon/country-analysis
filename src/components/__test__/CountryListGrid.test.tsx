@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import CountryListGrid from '../CountryListGrid';
 describe('CountryListGrid', () => {
   it('renders CountryListGrid component', () => {
-    render(<CountryListGrid favoritesOnly={false} />);
+    render(<CountryListGrid favoritesOnly={false} searchTerm='' />);
     const countryColumnInCountryListGrid = screen.getByText(/Country/i);
     expect(countryColumnInCountryListGrid).toBeInTheDocument();
     const populationColumnInGrid = screen.getByText(/Population/i);

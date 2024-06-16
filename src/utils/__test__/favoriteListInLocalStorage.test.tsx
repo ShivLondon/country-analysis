@@ -1,4 +1,3 @@
-// favoriteListInLocalStorage.test.ts
 import {
   fetchFavoriteListFromLocalStorage,
   toggleFavorite,

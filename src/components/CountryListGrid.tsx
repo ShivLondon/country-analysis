@@ -14,7 +14,13 @@ import { ColDef } from 'ag-grid-community';
 import { Country } from '../types/country';
 import FavoriteCountryCell from './FavoriteCountryCell';
 
-const CountryListGrid = ({ favoritesOnly }: { favoritesOnly: boolean }) => {
+const CountryListGrid = ({
+  favoritesOnly,
+  searchTerm,
+}: {
+  favoritesOnly: boolean;
+  searchTerm: string;
+}) => {
   const [countries, setCountries] = useState<any[]>([]);
   const [, setFavorites] = useState<string[]>(
     fetchFavoriteListFromLocalStorage()
@@ -72,6 +78,7 @@ const CountryListGrid = ({ favoritesOnly }: { favoritesOnly: boolean }) => {
         columnDefs={columns as ColDef<Country, any>[]}
         pagination={true}
         paginationPageSize={20}
+        quickFilterText={searchTerm}
       />
     </Box>
   );

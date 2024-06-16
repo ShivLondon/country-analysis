@@ -1,9 +1,7 @@
-// filterCountries.test.ts
 import filterCountries from '../filterCountries';
 import { fetchFavoriteListFromLocalStorage } from '../favoriteListInLocalStorage';
 import { Country } from '../../types/country';
 
-// Mock the fetchFavoriteListFromLocalStorage function
 jest.mock('../favoriteListInLocalStorage', () => ({
   fetchFavoriteListFromLocalStorage: jest.fn(),
 }));
