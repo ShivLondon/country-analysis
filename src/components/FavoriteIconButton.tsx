@@ -1,3 +1,5 @@
+import { Box } from '@mui/material';
+
 export default function FavoriteIconButton({
   handleFavoriteToggle,
   row,
@@ -8,7 +10,7 @@ export default function FavoriteIconButton({
   readonly isFavorite: boolean;
 }) {
   return (
-    <span
+    <Box
       onClick={() => {
         handleFavoriteToggle(row.data.name.common);
       }}
@@ -16,8 +18,8 @@ export default function FavoriteIconButton({
       role='button'
       tabIndex={0}
       title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-      style={{ cursor: 'pointer' }}>
+      sx={{ cursor: 'pointer' }}>
       {isFavorite ? '💙' : '♡'}
-    </span>
+    </Box>
   );
 }

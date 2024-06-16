@@ -17,7 +17,7 @@ const ExternalFilter = ({
     focused={true}
     value={searchTerm}
     onChange={e => setSearchTerm(e.target.value)}
-    style={{ width: '350px', marginRight: '30px' }}
+    sx={{ width: '350px', marginRight: '30px' }}
   />
 );
 

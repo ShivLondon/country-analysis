@@ -17,7 +17,7 @@ const App = () => {
         Country Analysis
       </Typography>
       <Box
-        style={{
+        sx={{
           paddingLeft: '20px',
           marginBottom: '10px',
         }}>

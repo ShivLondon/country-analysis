@@ -13,6 +13,8 @@ import filterCountries from '../utils/filterCountries';
 import { ColDef } from 'ag-grid-community';
 import { Country } from '../types/country';
 import FavoriteCountryCell from './FavoriteCountryCell';
+import CountryDetails from './CountryDetails';
+import CountryListGridColumns from './CountryListGridColumns';
 
 const CountryListGrid = ({
   favoritesOnly,
@@ -21,10 +23,12 @@ const CountryListGrid = ({
   favoritesOnly: boolean;
   searchTerm: string;
 }) => {
-  const [countries, setCountries] = useState<any[]>([]);
+  const [countries, setCountries] = useState<Country[]>([]);
   const [, setFavorites] = useState<string[]>(
     fetchFavoriteListFromLocalStorage()
   );
+  const [open, setOpen] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<Country | {}>({});
   useEffect(() => {
     fetchAllCountriesData().then(setCountries).catch(console.error);
   }, []);
@@ -32,55 +36,33 @@ const CountryListGrid = ({
     toggleFavorite(countryCode);
     setFavorites(fetchFavoriteListFromLocalStorage());
   };
-  const columns = [
-    {
-      headerName: 'Country',
-      field: 'name.common',
-      filter: true,
-      floatingFilter: true,
-      flex: 2,
-    },
-    {
-      headerName: 'Population',
-      field: 'population',
-      filter: true,
-      floatingFilter: true,
-      flex: 1,
-    },
-    {
-      headerName: 'Languages',
-      valueGetter: (params: any) =>
-        Object.values(params.data.languages || {}).join(', '),
-      filter: true,
-      floatingFilter: true,
-      flex: 2,
-    },
-    {
-      headerName: 'Currencies',
-      valueGetter: (params: any) =>
-        convertCommaSeperatedCurrencyList(params.data.currencies || {}),
-      filter: true,
-      floatingFilter: true,
-      flex: 2,
-    },
-    {
-      headerName: 'Favorite',
-      cellRenderer: (params: any) =>
-        FavoriteCountryCell(params, handleFavoriteToggle),
-      flex: 0.5,
-    },
-  ];
+  const onRowClickCountryDetails = (params: any) => {
+    setSelectedCountry(params.data);
+    setOpen(true);
+  };
 
   return (
-    <Box className='ag-theme-alpine' style={{ width: '100%', height: '84vh' }}>
-      <AgGridReact
-        rowData={filterCountries(countries, favoritesOnly)}
-        columnDefs={columns as ColDef<Country, any>[]}
-        pagination={true}
-        paginationPageSize={20}
-        quickFilterText={searchTerm}
+    <>
+      <Box className='ag-theme-alpine' sx={{ width: '100%', height: '84vh' }}>
+        <AgGridReact
+          rowData={filterCountries(countries, favoritesOnly)}
+          columnDefs={
+            CountryListGridColumns(
+              handleFavoriteToggle,
+              onRowClickCountryDetails
+            ) as ColDef[]
+          }
+          pagination={true}
+          paginationPageSize={20}
+          quickFilterText={searchTerm}
+        />
+      </Box>
+      <CountryDetails
+        open={open}
+        setOpen={setOpen}
+        countryDetails={selectedCountry}
       />
-    </Box>
+    </>
   );
 };
 export default CountryListGrid;
