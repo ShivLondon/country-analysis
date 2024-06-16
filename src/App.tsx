@@ -1,26 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CountryListGrid from './components/CountryListGrid';
+import { Box, Typography } from '@mui/material';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box>
+      <Typography variant='h2' component='h2' align='center' color={'blue'}>
+        Country Analysis
+      </Typography>
+      <CountryListGrid />
+    </Box>
   );
-}
+};
 
 export default App;
