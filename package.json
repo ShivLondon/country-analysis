@@ -25,7 +25,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage",
+    "testcoverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,6 +45,14 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/index.tsx",
+      "<rootDir>/src/reportWebVitals.ts",
+      "<rootDir>/src/components/FavoriteCountryCell.tsx",
+      "<rootDir>/src/types/country.ts"
     ]
   }
 }
