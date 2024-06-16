@@ -4,8 +4,8 @@ import { Box, Checkbox, FormControlLabel, Typography } from '@mui/material';
 import ExternalFilter from './components/ExternalFilter';
 
 const App = () => {
-  const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
   const handleFavoriteValueChange = (event: {
     target: { checked: boolean };
   }) => {
@@ -26,8 +26,11 @@ const App = () => {
           label='Favorites Only'
           control={<Checkbox onChange={handleFavoriteValueChange} />}
         />
+        <CountryListGrid
+          favoritesOnly={favoritesOnly}
+          searchTerm={searchTerm}
+        />
       </Box>
-      <CountryListGrid favoritesOnly={favoritesOnly} searchTerm={searchTerm} />
     </Box>
   );
 };
