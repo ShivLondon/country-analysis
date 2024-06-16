@@ -5,12 +5,27 @@ import { Box } from '@mui/material';
 import { convertCommaSeperatedCurrencyList } from '../utils/convertCommaSeperatedCurrencyList';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
+import {
+  fetchFavoriteListFromLocalStorage,
+  toggleFavorite,
+} from '../utils/favoriteListInLocalStorage';
+import filterCountries from '../utils/filterCountries';
+import { ColDef } from 'ag-grid-community';
+import { Country } from '../types/country';
+import FavoriteCountryCell from './FavoriteCountryCell';
 
-const CountryListGrid = () => {
+const CountryListGrid = ({ favoritesOnly }: { favoritesOnly: boolean }) => {
   const [countries, setCountries] = useState<any[]>([]);
+  const [, setFavorites] = useState<string[]>(
+    fetchFavoriteListFromLocalStorage()
+  );
   useEffect(() => {
     fetchAllCountriesData().then(setCountries).catch(console.error);
   }, []);
+  const handleFavoriteToggle = (countryCode: string) => {
+    toggleFavorite(countryCode);
+    setFavorites(fetchFavoriteListFromLocalStorage());
+  };
   const columns = [
     {
       headerName: 'Country',
@@ -44,15 +59,17 @@ const CountryListGrid = () => {
     },
     {
       headerName: 'Favorite',
+      cellRenderer: (params: any) =>
+        FavoriteCountryCell(params, handleFavoriteToggle),
       flex: 0.5,
     },
   ];
 
   return (
-    <Box className='ag-theme-alpine' style={{ width: '100%', height: '90vh' }}>
+    <Box className='ag-theme-alpine' style={{ width: '100%', height: '84vh' }}>
       <AgGridReact
-        rowData={countries}
-        columnDefs={columns}
+        rowData={filterCountries(countries, favoritesOnly)}
+        columnDefs={columns as ColDef<Country, any>[]}
         pagination={true}
         paginationPageSize={20}
       />
