@@ -1,5 +1,6 @@
 import { Country } from '../types/country';
 import { convertCommaSeperatedCurrencyList } from '../utils/convertCommaSeperatedCurrencyList';
+import { CountryFlagRenderer } from './CountryFlagRenderer';
 import FavoriteCountryCell from './FavoriteCountryCell';
 
 const CountryListGridColumns = (
@@ -12,7 +13,14 @@ const CountryListGridColumns = (
       field: 'name.common',
       filter: true,
       floatingFilter: true,
-      flex: 2,
+      flex: 1.5,
+      onCellClicked: onRowClickCountryDetails,
+    },
+    {
+      headerName: 'Flag',
+      field: 'name.flags.svg',
+      flex: 0.5,
+      cellRenderer: CountryFlagRenderer,
       onCellClicked: onRowClickCountryDetails,
     },
     {

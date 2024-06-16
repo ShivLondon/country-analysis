@@ -1,7 +1,7 @@
 const fetchAllCountriesData = async () => {
   try {
     const response = await fetch(
-      'https://restcountries.com/v3.1/all?fields=name,capital,currencies,population,languages,independent,status,unMember,region,subregion,landlocked,area,ccn3'
+      'https://restcountries.com/v3.1/all?fields=name,capital,currencies,population,languages,independent,status,unMember,region,subregion,landlocked,area,ccn3,flags'
     );
     if (!response.ok) {
       throw new Error('Network response was not ok');

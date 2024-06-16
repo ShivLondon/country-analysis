@@ -34,7 +34,7 @@ describe('fetchAllCountriesData', () => {
     const data = await fetchAllCountriesData();
     expect(data).toEqual(mockCountriesData);
     expect(fetch).toHaveBeenCalledWith(
-      'https://restcountries.com/v3.1/all?fields=name,capital,currencies,population,languages,independent,status,unMember,region,subregion,landlocked,area,ccn3'
+      'https://restcountries.com/v3.1/all?fields=name,capital,currencies,population,languages,independent,status,unMember,region,subregion,landlocked,area,ccn3,flags'
     );
   });
 
@@ -47,7 +47,7 @@ describe('fetchAllCountriesData', () => {
       'Network response was not ok'
     );
     expect(fetch).toHaveBeenCalledWith(
-      'https://restcountries.com/v3.1/all?fields=name,capital,currencies,population,languages,independent,status,unMember,region,subregion,landlocked,area,ccn3'
+      'https://restcountries.com/v3.1/all?fields=name,capital,currencies,population,languages,independent,status,unMember,region,subregion,landlocked,area,ccn3,flags'
     );
   });
 
@@ -58,7 +58,7 @@ describe('fetchAllCountriesData', () => {
 
     await expect(fetchAllCountriesData()).rejects.toThrow('Fetch failed');
     expect(fetch).toHaveBeenCalledWith(
-      'https://restcountries.com/v3.1/all?fields=name,capital,currencies,population,languages,independent,status,unMember,region,subregion,landlocked,area,ccn3'
+      'https://restcountries.com/v3.1/all?fields=name,capital,currencies,population,languages,independent,status,unMember,region,subregion,landlocked,area,ccn3,flags'
     );
   });
 });

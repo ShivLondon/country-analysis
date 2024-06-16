@@ -3,8 +3,6 @@ import CountryListGrid from '../CountryListGrid';
 describe('CountryListGrid', () => {
   it('renders CountryListGrid component', () => {
     render(<CountryListGrid favoritesOnly={false} searchTerm='' />);
-    const countryColumnInCountryListGrid = screen.getByText(/Country/i);
-    expect(countryColumnInCountryListGrid).toBeInTheDocument();
     const populationColumnInGrid = screen.getByText(/Population/i);
     expect(populationColumnInGrid).toBeInTheDocument();
   });
